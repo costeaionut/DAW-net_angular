@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace DAW.Data
 {
-    public class RepositoryContext : IdentityDbContext<User>
+    public class UserContext : IdentityDbContext<User>
     {
-        public RepositoryContext(DbContextOptions options)
+        public UserContext(DbContextOptions options)
         : base(options)
         {
         }

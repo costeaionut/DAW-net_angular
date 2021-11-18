@@ -1,9 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from '../shared/services/authentication.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'app';
+
+  constructor(private _authService: AuthenticationService) {
+  }
+
+  ngOnInit() {
+    if (this._authService.isUserAuthenticated()) {
+      this._authService.sendLoginStateNotification(true);
+    }
+  }
+
 }

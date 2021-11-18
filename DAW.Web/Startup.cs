@@ -1,4 +1,7 @@
+using DAW.Core;
+using DAW.Data;
 using DAW.Data.Models;
+using DAW.Web.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -26,11 +29,19 @@ namespace DAW.Web
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddAuthentication(opt => {
+            services.ConfigureSqlContext(Configuration);
+            services.AddAutoMapper(typeof(Startup));
+            services.AddScoped<JwtHandler>();
+
+            services.AddIdentity<User, IdentityRole>()
+                .AddEntityFrameworkStores<UserContext>();
+
+            var jwtSettings = Configuration.GetSection("JwtSettings");
+            services.AddAuthentication(opt =>
+            {
                 opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-            .AddJwtBearer(options =>
+            }).AddJwtBearer(options =>
             {
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
@@ -38,14 +49,17 @@ namespace DAW.Web
                     ValidateAudience = true,
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
-                    ValidIssuer = "http://localhost:5000",
-                    ValidAudience = "http://localhost:5000",
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"))
+                    ValidIssuer = jwtSettings.GetSection("validIssuer").Value,
+                    ValidAudience = jwtSettings.GetSection("validAudience").Value,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.GetSection("securityKey").Value))
                 };
             });
 
-            services.AddIdentity<User, IdentityRole>()
-                .AddEntityFrameworkStore(UserContext);
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/login");
+            });
 
             services.AddControllersWithViews();
             // In production, the Angular files will be served from this directory
