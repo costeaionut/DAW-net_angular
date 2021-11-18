@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
         this._router.navigate([this._returnUrl]);
       },
       (error) => {
-        this.errorMessage = error;
+        this.errorMessage = "Email or Password are incorrect!";
         this.showError = true;
       })
   }

@@ -40,8 +40,8 @@
             <a class="nav-link text-dark" [routerLink]="['/register']">Register</a>
           </li>
 
-          <li *ngIf="isUserAuthenticated" class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="btn btn-link text-dark" (click) ="logout()">Logout</a>
+          <li *ngIf="isUserAuthenticated" id="logoutButton" class="nav-item" [routerLinkActive]="['link-active']">
+            <a class="nav-link text-dark" [routerLink]="['']" (click) ="logout()">Logout</a>
           </li>
 
         </ul>
