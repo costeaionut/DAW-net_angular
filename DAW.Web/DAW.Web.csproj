@@ -32,6 +32,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\DAW.Core\DAW.Core.csproj" />
     <ProjectReference Include="..\DAW.Data\DAW.Data.csproj" />
     <ProjectReference Include="..\DAW.Dto\DAW.Dto.csproj" />

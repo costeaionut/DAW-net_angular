@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAW.Dto
+namespace DAW.Dto.Auth
 {
     public class RegistrationResponseDto
     {

@@ -9,9 +9,9 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DAW.Data.Migrations
 {
-    [DbContext(typeof(UserContext))]
-    [Migration("20211118120435_CreatePainting")]
-    partial class CreatePainting
+    [DbContext(typeof(RepositoryContext))]
+    [Migration("20211120002631_AddOrders")]
+    partial class AddOrders
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,20 +21,66 @@ namespace DAW.Data.Migrations
                 .HasAnnotation("ProductVersion", "5.0.11")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("DAW.Data.Models.Painting", b =>
+            modelBuilder.Entity("DAW.Core.BusinessObject.Order", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("CreationDate")
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<double>("TotalPrice")
+                        .HasColumnType("float");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("DAW.Core.BusinessObject.Order_Painting", b =>
+                {
+                    b.Property<Guid>("OrderId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("PaintingId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("OrderId", "PaintingId");
+
+                    b.HasIndex("PaintingId");
+
+                    b.ToTable("OrderPaintings");
+                });
+
+            modelBuilder.Entity("DAW.Core.BusinessObject.Painting", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
+
+                    b.Property<string>("ImageLink")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                        .HasMaxLength(80)
+                        .HasColumnType("nvarchar(80)");
 
                     b.Property<string>("PainterId")
                         .IsRequired()
@@ -50,7 +96,7 @@ namespace DAW.Data.Migrations
                     b.ToTable("Paintings");
                 });
 
-            modelBuilder.Entity("DAW.Data.Models.User", b =>
+            modelBuilder.Entity("DAW.Core.BusinessObject.User", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -111,9 +157,33 @@ namespace DAW.Data.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("DAW.Data.Models.Painting", b =>
+            modelBuilder.Entity("DAW.Core.BusinessObject.Order", b =>
                 {
-                    b.HasOne("DAW.Data.Models.User", null)
+                    b.HasOne("DAW.Core.BusinessObject.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("DAW.Core.BusinessObject.Order_Painting", b =>
+                {
+                    b.HasOne("DAW.Core.BusinessObject.Order", null)
+                        .WithMany()
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DAW.Core.BusinessObject.Painting", null)
+                        .WithMany()
+                        .HasForeignKey("PaintingId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("DAW.Core.BusinessObject.Painting", b =>
+                {
+                    b.HasOne("DAW.Core.BusinessObject.User", null)
                         .WithMany()
                         .HasForeignKey("PainterId")
                         .OnDelete(DeleteBehavior.Cascade)

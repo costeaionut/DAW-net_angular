@@ -1,6 +1,8 @@
 using DAW.Core;
+using DAW.Core.Abstraction;
+using DAW.Core.BusinessObject;
 using DAW.Data;
-using DAW.Data.Models;
+using DAW.Data.Managers;
 using DAW.Web.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -31,10 +33,11 @@ namespace DAW.Web
 
             services.ConfigureSqlContext(Configuration);
             services.AddAutoMapper(typeof(Startup));
+            services.AddScoped<IPaintingManager, PaintingManager>();
             services.AddScoped<JwtHandler>();
 
             services.AddIdentity<User, IdentityRole>()
-                .AddEntityFrameworkStores<UserContext>();
+                .AddEntityFrameworkStores<RepositoryContext>();
 
             var jwtSettings = Configuration.GetSection("JwtSettings");
             services.AddAuthentication(opt =>

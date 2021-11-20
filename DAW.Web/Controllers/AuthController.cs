@@ -1,7 +1,8 @@
 ﻿using AutoMapper;
 using DAW.Core;
-using DAW.Data.Models;
+using DAW.Core.BusinessObject;
 using DAW.Dto;
+using DAW.Dto.Auth;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;

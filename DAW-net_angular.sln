@@ -5,11 +5,16 @@ VisualStudioVersion = 16.0.31702.278
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAW.Web", "DAW.Web\DAW.Web.csproj", "{B19D4612-588C-4880-80BE-168F8F2AA6B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAW.Data", "DAW.Data\DAW.Data.csproj", "{7D31A694-B019-4FDE-A7B4-93EFADC81752}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAW.Data", "DAW.Data\DAW.Data.csproj", "{7D31A694-B019-4FDE-A7B4-93EFADC81752}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAW.Core", "DAW.Core\DAW.Core.csproj", "{31BBED11-7F97-4CD5-87B3-80DB320BE907}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAW.Core", "DAW.Core\DAW.Core.csproj", "{31BBED11-7F97-4CD5-87B3-80DB320BE907}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAW.Dto", "DAW.Dto\DAW.Dto.csproj", "{73F1C9CD-26AD-4743-8B37-E5D769C31318}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAW.Dto", "DAW.Dto\DAW.Dto.csproj", "{73F1C9CD-26AD-4743-8B37-E5D769C31318}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AED2E719-0895-4889-B0A7-0F04C2D8C082}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -12,7 +12,7 @@ namespace DAW.Web.Extensions
     public static class ServiceExtensions
     {
         public static void ConfigureSqlContext(this IServiceCollection services, IConfiguration configuration) =>
-            services.AddDbContext<UserContext>(opts =>
+            services.AddDbContext<RepositoryContext>(opts =>
                 opts.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
     }
 }

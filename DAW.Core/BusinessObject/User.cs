@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAW.Data.Models
+namespace DAW.Core.BusinessObject
 {
     public class User : IdentityUser
     {
