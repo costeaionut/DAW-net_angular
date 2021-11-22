@@ -78,7 +78,7 @@ namespace DAW.Data.Managers
                 await _context.SaveChangesAsync();
                 return oldPainting;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return null;
             }

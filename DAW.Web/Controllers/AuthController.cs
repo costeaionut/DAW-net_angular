@@ -3,12 +3,14 @@ using DAW.Core;
 using DAW.Core.BusinessObject;
 using DAW.Dto;
 using DAW.Dto.Auth;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace DAW.Web.Controllers
@@ -67,5 +69,20 @@ namespace DAW.Web.Controllers
             return Ok(new AuthResponseDto { IsAuthSuccessful = true, Token = token });
         }
 
+        [HttpGet("GetCurrentUser"), Authorize]
+        public async Task<ActionResult<User>> GetCurrentUser()
+        {
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+
+            var email = claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
+
+            if (email == null)
+                return BadRequest("There is no user logged in");
+
+            User user = await _userManager.FindByEmailAsync(email);
+
+            return user;
+        } 
     }
 }
