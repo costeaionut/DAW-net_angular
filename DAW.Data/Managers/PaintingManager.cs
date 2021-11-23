@@ -20,17 +20,10 @@ namespace DAW.Data.Managers
 
         public async Task<Painting> CreatePaintingAsync(Painting painting)
         {
-            try
-            {
-                var res = await _context.Paintings.AddAsync(painting);
-                await _context.SaveChangesAsync();
-
-                return res.Entity;
-            }
-            catch
-            {
-                return null;
-            }
+            var res = await _context.Paintings.AddAsync(painting);
+            await _context.SaveChangesAsync();
+            
+            return res.Entity;
         }
         
         public IEnumerable<Painting> GetPaintingsByPainter(string painterId)

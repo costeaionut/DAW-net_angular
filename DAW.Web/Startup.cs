@@ -34,6 +34,7 @@ namespace DAW.Web
             services.ConfigureSqlContext(Configuration);
             services.AddAutoMapper(typeof(Startup));
             services.AddScoped<IPaintingManager, PaintingManager>();
+            services.AddScoped<IOrderManager, OrderManager>();
             services.AddScoped<JwtHandler>();
 
             services.AddIdentity<User, IdentityRole>()
