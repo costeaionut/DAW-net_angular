@@ -2,6 +2,7 @@
 using DAW.Core.Abstraction;
 using DAW.Core.BusinessObject;
 using DAW.Dto.Orders;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -26,6 +27,7 @@ namespace DAW.Web.Controllers
             _userManager = userManager;
         }
 
+        [Authorize(Roles = "Buyer")]
         [HttpPost("CreateOrder")]
         public async Task<ActionResult<Order>> CreateOrder([FromBody] NewOrderDto order)
         {
@@ -47,6 +49,7 @@ namespace DAW.Web.Controllers
 
         }
 
+        [Authorize(Roles = "Buyer")]
         [HttpGet("GetDisplayOrders/{userId}")]
         public async Task<ActionResult<IEnumerable<DisplayOrderDto>>> GetMyDisplayOrders(string userId)
         {
@@ -77,6 +80,7 @@ namespace DAW.Web.Controllers
             return Ok(displayOrders);
         }
 
+        [Authorize(Roles = "Buyer")]
         [HttpGet("GetDetailedOrder/{orderId}")]
         public async Task<IActionResult> GetDetailedOrder(Guid orderId)
         {
@@ -95,6 +99,7 @@ namespace DAW.Web.Controllers
             return Ok(orderToBeReturned);
         }
 
+        [Authorize]
         [HttpDelete("CancelOrder/{orderId}")]
         public IActionResult DeleteOrder(Guid orderId)
         {

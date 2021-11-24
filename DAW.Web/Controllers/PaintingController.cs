@@ -2,6 +2,7 @@
 using DAW.Core.Abstraction;
 using DAW.Core.BusinessObject;
 using DAW.Dto.Paintings;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -26,6 +27,7 @@ namespace DAW.Web.Controllers
             _userManager = userManager;
         }
 
+        [Authorize(Roles = "Seller")]
         [HttpPost("CreatePainting")]
         public async Task<ActionResult<Painting>> CreatePainting([FromBody] NewPaintingDto paintToBeCreated)
         {
@@ -75,6 +77,7 @@ namespace DAW.Web.Controllers
             return paint;
         }
 
+        [Authorize(Roles = "Seller")]
         [HttpPut("UpdatePainting")]
         public async Task<IActionResult> UpdatePainting([FromBody] PaintingDto painting)
         {
@@ -89,6 +92,7 @@ namespace DAW.Web.Controllers
         }
 
         [HttpDelete("DeletePainting")]
+        [Authorize(Roles = "Seller")]
         public async Task<IActionResult> DeletePainting([FromBody] PaintingDto painting)
         {
             if (painting == null)

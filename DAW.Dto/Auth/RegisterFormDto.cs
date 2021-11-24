@@ -19,6 +19,9 @@ namespace DAW.Dto.Auth
         public string LastName { get; set; }
         
         [Required]
+        public string Role { get; set; }
+
+        [Required]
         public string Password { get; set; }
 
         [Required]

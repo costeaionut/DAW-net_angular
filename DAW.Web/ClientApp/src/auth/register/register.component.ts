@@ -19,6 +19,7 @@ export class RegisterComponent implements OnInit {
       firstName: new FormControl('', [Validators.required]),
       lastName: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.email]),
+      role: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required]),
       confirm: new FormControl('')
     });
@@ -39,6 +40,7 @@ export class RegisterComponent implements OnInit {
       firstName: formValues.firstName,
       lastName: formValues.lastName,
       email: formValues.email,
+      role: formValues.role,
       password: formValues.password,
       confirmPassword: formValues.confirm
     };
