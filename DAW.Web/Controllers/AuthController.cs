@@ -70,7 +70,7 @@ namespace DAW.Web.Controllers
         }
 
         [HttpGet("GetCurrentUser"), Authorize]
-        public async Task<ActionResult<User>> GetCurrentUser()
+        public async Task<IActionResult> GetCurrentUser()
         {
             var identity = (ClaimsIdentity)User.Identity;
             IEnumerable<Claim> claims = identity.Claims;
@@ -82,7 +82,19 @@ namespace DAW.Web.Controllers
 
             User user = await _userManager.FindByEmailAsync(email);
 
-            return user;
+            return Ok(new
+            {
+                id = user.Id,
+                firstName = user.FirstName,
+                lastName = user.LastName,
+                email = user.Email,
+                role = user.Role
+            });
         } 
+    
+        [HttpGet("GetUserById/{userId}")]
+        public async Task<ActionResult<User>> GetUserById(string userId)
+            => userId == null ? BadRequest("ID is not valid!") 
+                                : await _userManager.FindByIdAsync(userId);
     }
 }

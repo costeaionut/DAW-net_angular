@@ -14,5 +14,6 @@ namespace DAW.Core.Abstraction
         public Painting GetPaintingById(Guid paintingId);
         Task<Painting> UpdatePaintingAsync(Painting paintingToBeUpdated);
         Task<bool> DeletePainting(Painting paintingToBeDeleted);
+        List<Painting> GetAllPaintings();
     }
 }

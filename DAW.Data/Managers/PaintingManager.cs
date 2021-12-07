@@ -91,5 +91,8 @@ namespace DAW.Data.Managers
                 return false;
             }
         }
+
+        public List<Painting> GetAllPaintings()
+            => _context.Paintings.ToList();
     }
 }

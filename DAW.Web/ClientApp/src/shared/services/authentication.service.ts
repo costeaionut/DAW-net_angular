@@ -6,6 +6,8 @@ import { UserForLoginDto } from '../interfaces/user/userForLoginDto';
 import { LoginResponseDto } from '../interfaces/response/loginResponseDto';
 import { Subject } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { UserInfo } from '../interfaces/user/userInfo';
+import { User } from 'oidc-client';
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +35,10 @@ export class AuthenticationService {
     return this.http.post<LoginResponseDto>(this.baseUrl + "api/Auth/Login", body);
   }
 
+  public getCurrentUser() {
+    return this.http.get<UserInfo>(this.baseUrl + "api/Auth/GetCurrentUser");
+  }
+
   public isUserAuthenticated(): boolean{
     const token = localStorage.getItem("jwt");
 
@@ -44,6 +50,10 @@ export class AuthenticationService {
 
   public sendLoginStateNotification(isAuthenticated) {
     this._authChangeSub.next(isAuthenticated);
+  }
+
+  public getUserById(userId: string) {
+    return this.http.get<UserInfo>(this.baseUrl + "api/Auth/GetUserById/" + userId);
   }
 
   public logout() {

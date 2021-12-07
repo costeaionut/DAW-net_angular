@@ -13,6 +13,9 @@ import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { RegisterComponent } from '../auth/register/register.component';
 import { LoginComponent } from '../auth/login/login.component';
+import { PaintingModule } from '../painting/painting.module';
+import { ListingComponent } from '../painting/listing/listing.component';
+import { PaintingDetailComponent } from '../painting/painting-detail/painting-detail.component';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -31,17 +34,20 @@ export function tokenGetter() {
     HttpClientModule,
     FormsModule,
     AuthModule,
+    PaintingModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: '', component: HomeComponent, pathMatch: 'full'},
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'register', component: RegisterComponent },
-      { path: 'login', component: LoginComponent }
+      { path: 'login', component: LoginComponent },
+      { path: 'listing', component: ListingComponent },
+      { path: 'painting-detail/:paintingId', component: PaintingDetailComponent }
     ]),
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        whitelistedDomains: ["localhost:5001", "localhost:4200", "localhost:5000", "localhost:44397"],
+        whitelistedDomains: ["localhost:44397"],
         blacklistedRoutes: []
       }
     })

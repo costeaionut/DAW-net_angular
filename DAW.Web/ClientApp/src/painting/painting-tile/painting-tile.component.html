@@ -1,0 +1,15 @@
+<div class="card" style="width: 18rem;">
+  <br />
+  <img class="card-img-top" src="https://media.timeout.com/images/103166735/1024/768/image.jpg" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">{{painting.name}}</h5>
+    <p class="card-text">{{painting.description}}</p>
+    <p class="card-text">Price: {{painting.price}}$</p>
+    <div class="card-text">
+      <button class="btn btn-primary float-left" (click)="goToDetailsPage(painting);">
+      See details!
+      </button>
+      <button class="btn btn-success float-right">Add item to cart</button>
+    </div>
+  </div>
+</div>

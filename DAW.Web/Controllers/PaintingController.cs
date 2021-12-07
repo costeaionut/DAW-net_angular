@@ -63,6 +63,10 @@ namespace DAW.Web.Controllers
             return Ok(paintings);
         }
 
+        [HttpGet("GetAllPaintings")]
+        public ActionResult<List<Painting>> GetAllPaintings()
+            => _paintingManager.GetAllPaintings();
+
         [HttpGet("GetPainting/{id}")]
         public ActionResult<Painting> GetPaintingById(Guid id)
         {
