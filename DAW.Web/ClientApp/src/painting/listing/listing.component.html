@@ -1,5 +1,14 @@
-<div class="row">
-  <div *ngFor="let painting of paintingsList" class="col-4">
-    <app-painting-tile [painting]="painting"></app-painting-tile>
+<div *ngIf="checkIfPageIsLoaded()">
+  <button *ngIf="this.currentUser.role == 'Seller'" class="btn btn-primary mb-3"
+          (click)="this._router.navigate(['/create'])">
+    Create new painting
+  </button>
+  <div class="row">
+    <div *ngFor="let painting of paintingsList" class="col-4">
+      <app-painting-tile [painting]="painting"></app-painting-tile>
+    </div>
   </div>
+</div>
+<div *ngIf="!checkIfPageIsLoaded()">
+  <p>ASTEPTAM</p>
 </div>

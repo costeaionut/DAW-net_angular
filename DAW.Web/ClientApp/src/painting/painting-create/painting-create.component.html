@@ -1,0 +1,55 @@
+<div class="card">
+<div class="card-body">
+  <h1 class="card-title">Add Painting</h1>
+
+  <form [formGroup]="newPaintingForm" autocomplete="off" novalidate (ngSubmit)="createPainting(newPaintingForm.value)">
+
+    <div class="form-group row">
+      <label for="paintingName" class="col-form-label col-sm-2">Painting Name:</label>
+      <div class="col-md-5">
+        <input type="text" id="paintingName" formControlName="paintingName" class="form-control" />
+      </div>
+      <div class="col-md-5">
+        <em *ngIf="validateControl('paintingName') && hasError('paintingName', 'required')">Painting's name is required</em>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="description" class="col-form-label col-sm-2">Description:</label>
+      <div class="col-md-5">
+        <textarea id="description" formControlName="description" class="form-control"></textarea>
+      </div>
+      <div class="col-md-5">
+        <em *ngIf="validateControl('description') && hasError('description', 'required')">Description is required</em>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="link" class="col-form-label col-sm-2">Display image link:</label>
+      <div class="col-md-5">
+        <input type="text" id="link" formControlName="link" class="form-control" />
+      </div>
+      <div class="col-md-5">
+        <em *ngIf="validateControl('link') && hasError('link', 'required')">Display image is required</em>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="price" class="col-form-label col-sm-2">Price:</label>
+      <div class="col-md-5">
+        <input type="text" id="link" formControlName="price" class="form-control" placeholder="##.##" />
+      </div>
+      <div class="col-md-5">
+        <em *ngIf="validateControl('price') && hasError('price', 'required')">Price is required</em>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-md-1">
+        <button type="submit" class="btn btn-info" [disabled]="!newPaintingForm.valid">Add</button>
+      </div>
+    </div>
+
+  </form>
+</div>
+</div>

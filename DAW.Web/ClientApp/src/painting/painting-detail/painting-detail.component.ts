@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Painting } from '../../shared/interfaces/paintings/painting';
 import { UserInfo } from '../../shared/interfaces/user/userInfo';
 import { AuthenticationService } from '../../shared/services/authentication.service';
@@ -14,7 +14,14 @@ export class PaintingDetailComponent implements OnInit {
 
   painting: Painting | undefined
   painter: UserInfo | undefined
-  constructor(private route: ActivatedRoute, private paintingService: PaintingsService, private userService: AuthenticationService) { }
+  currentUser: UserInfo | undefined
+
+  constructor(
+    private route: ActivatedRoute,
+    private paintingService: PaintingsService,
+    private userService: AuthenticationService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     const routeParams = this.route.snapshot.paramMap;
@@ -29,8 +36,21 @@ export class PaintingDetailComponent implements OnInit {
 
     }, err => console.error(err))
 
+    this.userService.getCurrentUser().subscribe(res => {
+      this.currentUser = res;
+    }, err => console.error(err))
+
   }
 
+  public isPageLoaded() {
+    return this.painter && this.painting && this.currentUser;
+  }
 
+  public deleteItem() {
+    this.paintingService.deletePainting(this.painting).subscribe(_ => {
+      console.log("Item was deleted")
+      this.router.navigate(['/listing'])
+    }, err => console.error(err))
+  }
 
 }

@@ -1,1 +1,52 @@
-<p>painting-detail works!</p>
+<div *ngIf="isPageLoaded()">
+  <div class="row">
+
+    <div class="col-6 mb-3">
+      <h3>{{this.painting.name}}</h3>
+      <h6>by {{this.painter.firstName}} {{this.painter.lastName}}</h6>
+    </div>
+
+    <div class="col-6">
+      <p class="float-right"><b>Creation date:</b> {{this.painting.creationDate | date:'dd-MM-yyyy'}}</p>
+    </div>
+
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-6">
+      <b>Descriere:</b>
+      {{this.painting.description}}
+
+    <br />
+
+      <b>Pret:</b>
+      {{this.painting.price}}$
+
+    <br />
+
+    <button *ngIf="this.painter.id == this.currentUser.id"
+            class="btn btn-danger"
+            (click)="deleteItem()">
+      Delete Painting
+    </button>
+
+    </div>
+    <div class="col-6">
+      <img class="img-fluid float-left" src="https://media.timeout.com/images/103166735/1024/768/image.jpg" alt="Card image cap">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-6">
+      <button class="btn btn-primary" (click)="this.router.navigate(['/listing'])">Back</button>
+    </div>
+    <div class="col-6">
+      <button *ngIf="this.currentUser.role == 'Buyer'" class="btn btn-success"> Buy painting </button>
+    </div>
+  </div>
+
+
+</div>
+<div *ngIf="!isPageLoaded()">
+  INCA ASTEPTAM
+</div>
