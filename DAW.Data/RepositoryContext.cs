@@ -20,6 +20,7 @@ namespace DAW.Data
         public DbSet<Painting> Paintings { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Order_Painting> OrderPaintings{ get; set; }
+        public DbSet<Address> Addresses { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -29,6 +30,11 @@ namespace DAW.Data
                 .HasOne<User>()
                 .WithMany()
                 .HasForeignKey(p => p.PainterId);
+
+            modelBuilder.Entity<Address>()
+                .HasOne<User>()
+                .WithMany()
+                .HasForeignKey(a => a.UserId);
 
             modelBuilder.Entity<Order>()
                 .HasOne<User>()
