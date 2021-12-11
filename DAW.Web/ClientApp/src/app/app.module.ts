@@ -17,6 +17,9 @@ import { PaintingModule } from '../painting/painting.module';
 import { ListingComponent } from '../painting/listing/listing.component';
 import { PaintingDetailComponent } from '../painting/painting-detail/painting-detail.component';
 import { PaintingCreateComponent } from '../painting/painting-create/painting-create.component';
+import { OrderModule } from '../order/order.module';
+import { OrderDisplayComponent } from '../order/order-display/order-display.component';
+import { BuyerGuard } from './buyer.guard';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -36,6 +39,7 @@ export function tokenGetter() {
     FormsModule,
     AuthModule,
     PaintingModule,
+    OrderModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full'},
       { path: 'counter', component: CounterComponent },
@@ -44,7 +48,8 @@ export function tokenGetter() {
       { path: 'login', component: LoginComponent },
       { path: 'listing', component: ListingComponent },
       { path: 'create', component: PaintingCreateComponent },
-      { path: 'painting-detail/:paintingId', component: PaintingDetailComponent }
+      { path: 'painting-detail/:paintingId', component: PaintingDetailComponent },
+      { path: 'display-cart', component: OrderDisplayComponent, canActivate: [BuyerGuard] }
     ]),
     JwtModule.forRoot({
       config: {

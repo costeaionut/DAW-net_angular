@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserInfo } from '../../shared/interfaces/user/userInfo';
 import { AuthenticationService } from '../../shared/services/authentication.service';
 
 @Component({
@@ -10,6 +11,7 @@ import { AuthenticationService } from '../../shared/services/authentication.serv
 export class NavMenuComponent {
   isExpanded = false;
   public isUserAuthenticated: boolean;
+  currentUser: UserInfo;
 
   constructor(private _authService: AuthenticationService, private _router: Router) {
     this._authService.authChanged
@@ -23,6 +25,12 @@ export class NavMenuComponent {
       .subscribe(res => {
         this.isUserAuthenticated = res;
       })
+
+    this._authService.getCurrentUser()
+      .subscribe(res => {
+        this.currentUser = res;
+      }, err => console.error(err))
+
   }
 
   logout() {

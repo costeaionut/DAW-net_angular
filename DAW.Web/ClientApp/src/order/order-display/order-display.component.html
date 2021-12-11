@@ -1,0 +1,25 @@
+<div *ngIf="isPageLoaded()">
+  <div *ngFor="let paint of this.orderPaintings">
+    <div class="row">
+      <div class="col-4">
+        <p><b>Name:</b>{{paint.name}}</p>
+      </div>
+      <div class="col-4">
+        <p><b>Description:</b>{{paint.description | shortDescription}}</p>
+      </div>
+      <div class="col-4">
+        <p><b>Price:</b>{{paint.price}}</p>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <button class="btn btn-success float-left" (click)="buyItems()"> Buy! </button>
+    <p class="float-right">Total price: {{this.totalPrice}}$</p>
+  </div>
+
+</div>
+
+<div *ngIf="this.orderPaintings.length==0">
+  <h1>Cart is empty!</h1>
+</div>

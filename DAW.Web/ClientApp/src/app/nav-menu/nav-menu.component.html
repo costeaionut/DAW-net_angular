@@ -28,8 +28,11 @@
           <li class="nav-item" [routerLinkActive]="['link-active']">
             <a class="nav-link text-dark" [routerLink]="['/listing']">Paintings</a>
           </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/fetch-data']">Fetch data</a>
+          <li *ngIf="this.currentUser.role == 'Buyer'" class="nav-item" [routerLinkActive]="['link-active']">
+            <a class="nav-link text-dark" [routerLink]="['/display-cart']">
+              <img width="20" src="/shopping-cart-solid.svg" />
+              Checkout
+            </a>
           </li>
 
           <li *ngIf="!isUserAuthenticated" class="nav-item" [routerLinkActive]="['link-active']">

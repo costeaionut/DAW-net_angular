@@ -13,7 +13,7 @@ import { PaintingsService } from '../../shared/services/paintings.service';
   styleUrls: ['./listing.component.css']
 })
 export class ListingComponent implements OnInit {
-
+  
   baseUrl: string;
   paintingsList: Array<Painting>;
   currentUser: UserInfo;
