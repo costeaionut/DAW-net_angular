@@ -1,4 +1,5 @@
-﻿using DAW.Core.BusinessObject;
+﻿using DAW.Core.Abstraction;
+using DAW.Core.BusinessObject;
 using DAW.Data.Managers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,9 +15,9 @@ namespace DAW.Web.Controllers
     public class AddressController : ControllerBase
     {
 
-        private readonly AddressManager _addressManager;
+        private readonly IAddressManager _addressManager;
 
-        public AddressController(AddressManager addressManager)
+        public AddressController(IAddressManager addressManager)
         {
             _addressManager = addressManager;
         }

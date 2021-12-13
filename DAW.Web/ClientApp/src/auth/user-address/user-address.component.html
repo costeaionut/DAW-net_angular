@@ -1,1 +1,24 @@
-<p>user-address works!</p>
+<div *ngIf="pageIsLoaded()">
+
+  <div *ngIf="hasAddressSet">
+
+    <h3>Your address is:</h3>
+    <h5>Country: {{address.country}}</h5>
+    <h5>Town:{{address.town}}</h5>
+    <h5>Street: {{address.streetName}} {{address.streetNumber}}</h5>
+    <h5>Flat: {{address.flatNumber}}</h5>
+    <h5>Zip Code:{{address.postalCode}}</h5>
+
+    <button class="btn btn-danger" (click)="deleteAddress()">Delete address</button>
+
+  </div>
+
+  <div *ngIf="!hasAddressSet">
+    <h1>There is currently no delivery address set.</h1>
+    <button class="btn btn-primary" (click)="addAddress()">Add Address</button>
+  </div>
+
+</div>
+<div *ngIf="!pageIsLoaded()">
+  LOADING
+</div>

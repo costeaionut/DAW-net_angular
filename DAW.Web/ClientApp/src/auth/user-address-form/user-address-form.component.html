@@ -1,0 +1,45 @@
+<form [formGroup]="addressForm" (ngSubmit)="addAddress(addressForm.value)">
+  <div class="form-row">
+
+    <div class="form-group col-md-6">
+      <label for="inputCountry">Country</label>
+      <input formControlName="country" type="text" class="form-control" id="inputCountry" placeholder="Romania">
+    </div>
+
+    <div class="form-group col-md-6">
+      <label for="inputCity">City</label>
+      <input formControlName="town" type="text" class="form-control" id="inputCity" placeholder="Bucharest">
+    </div>
+  </div>
+
+  <div class="form-row">
+
+    <div class="form-group col-md-10">
+      <label for="inputStreet">Street Name:</label>
+      <input formControlName="streetName" type="text" class="form-control" id="inputStreet" placeholder="Union Bv.">
+    </div>
+
+    <div class="form-group col-md-2">
+      <label for="inputStreetNumber">Street No</label>
+      <input formControlName="streetNumber" type="text" class="form-control" id="inputStreetNumber" placeholder="1234">
+    </div>
+
+  </div>
+
+  <div class="form-row">
+
+    <div class="form-group col-md-10">
+      <label for="inputFlat">Flat</label>
+      <input formControlName="flat" type="text" class="form-control" id="inputFlat">
+    </div>
+
+    <div class="form-group col-md-2">
+      <label for="inputZip">Zip</label>
+      <input formControlName="postalCode" type="text" class="form-control" id="inputZip">
+    </div>
+
+  </div>
+
+  <button type="submit" class="btn btn-primary">Add address</button>
+
+</form>

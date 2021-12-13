@@ -20,6 +20,7 @@ import { OrderModule } from '../order/order.module';
 import { OrderDisplayComponent } from '../order/order-display/order-display.component';
 import { BuyerGuard } from './buyer.guard';
 import { UserAddressComponent } from '../auth/user-address/user-address.component';
+import { UserAddressFormComponent } from '../auth/user-address-form/user-address-form.component';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -48,7 +49,8 @@ export function tokenGetter() {
       { path: 'create', component: PaintingCreateComponent },
       { path: 'painting-detail/:paintingId', component: PaintingDetailComponent },
       { path: 'display-cart', component: OrderDisplayComponent, canActivate: [BuyerGuard] },
-      { path: 'address', component: UserAddressComponent }
+      { path: 'address', component: UserAddressComponent },
+      { path: 'create-address', component: UserAddressFormComponent }
     ]),
     JwtModule.forRoot({
       config: {
