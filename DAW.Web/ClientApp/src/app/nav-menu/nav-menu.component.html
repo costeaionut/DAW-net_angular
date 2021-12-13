@@ -25,10 +25,12 @@
               [routerLinkActiveOptions]="{ exact: true }">
             <a class="nav-link text-dark" [routerLink]="['/']">Home</a>
           </li>
+
           <li class="nav-item" [routerLinkActive]="['link-active']">
             <a class="nav-link text-dark" [routerLink]="['/listing']">Paintings</a>
           </li>
-          <li *ngIf="this.currentUser.role == 'Buyer'" class="nav-item" [routerLinkActive]="['link-active']">
+
+          <li *ngIf="checkRoleForBuyer()" class="nav-item" [routerLinkActive]="['link-active']">
             <a class="nav-link text-dark" [routerLink]="['/display-cart']">
               <img width="20" src="/shopping-cart-solid.svg" />
               Checkout
@@ -43,8 +45,12 @@
             <a class="nav-link text-dark" [routerLink]="['/register']">Register</a>
           </li>
 
+          <li *ngIf="isUserAuthenticated" class="nav-item" [routerLinkActive]="['link-active']">
+            <a class="nav-link text-dark" [routerLink]="['/address']" >Address</a>
+          </li>
+
           <li *ngIf="isUserAuthenticated" id="logoutButton" class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['']" (click) ="logout()">Logout</a>
+            <a class="nav-link text-dark" [routerLink]="['']" (click)="logout()">Logout</a>
           </li>
 
         </ul>

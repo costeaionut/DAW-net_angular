@@ -33,9 +33,11 @@ namespace DAW.Web
 
             services.ConfigureSqlContext(Configuration);
             services.AddAutoMapper(typeof(Startup));
+            services.AddScoped<JwtHandler>();
+
             services.AddScoped<IPaintingManager, PaintingManager>();
             services.AddScoped<IOrderManager, OrderManager>();
-            services.AddScoped<JwtHandler>();
+            services.AddScoped<IAddressManager, AddressManager>();
 
             services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<RepositoryContext>();

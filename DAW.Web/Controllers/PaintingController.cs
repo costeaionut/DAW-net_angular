@@ -36,8 +36,6 @@ namespace DAW.Web.Controllers
 
             Painting paint = _mapper.Map<Painting>(paintToBeCreated);
 
-            //TODO: Check model validity
-
             var paintinEntry = await _paintingManager.CreatePaintingAsync(paint);
 
             if (paintinEntry == null)

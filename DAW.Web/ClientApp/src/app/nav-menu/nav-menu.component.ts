@@ -45,4 +45,13 @@ export class NavMenuComponent {
   toggle() {
     this.isExpanded = !this.isExpanded;
   }
+
+  public checkRoleForBuyer() {
+    if (this.isUserAuthenticated == true)
+      if (this.currentUser.role == 'Buyer')
+        return true;
+
+    return false;
+  }
+
 }

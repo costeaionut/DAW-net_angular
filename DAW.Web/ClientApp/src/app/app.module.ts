@@ -10,7 +10,6 @@ import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { RegisterComponent } from '../auth/register/register.component';
 import { LoginComponent } from '../auth/login/login.component';
 import { PaintingModule } from '../painting/painting.module';
@@ -20,6 +19,7 @@ import { PaintingCreateComponent } from '../painting/painting-create/painting-cr
 import { OrderModule } from '../order/order.module';
 import { OrderDisplayComponent } from '../order/order-display/order-display.component';
 import { BuyerGuard } from './buyer.guard';
+import { UserAddressComponent } from '../auth/user-address/user-address.component';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -31,7 +31,6 @@ export function tokenGetter() {
     NavMenuComponent,
     HomeComponent,
     CounterComponent,
-    FetchDataComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -43,13 +42,13 @@ export function tokenGetter() {
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full'},
       { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
       { path: 'register', component: RegisterComponent },
       { path: 'login', component: LoginComponent },
       { path: 'listing', component: ListingComponent },
       { path: 'create', component: PaintingCreateComponent },
       { path: 'painting-detail/:paintingId', component: PaintingDetailComponent },
-      { path: 'display-cart', component: OrderDisplayComponent, canActivate: [BuyerGuard] }
+      { path: 'display-cart', component: OrderDisplayComponent, canActivate: [BuyerGuard] },
+      { path: 'address', component: UserAddressComponent }
     ]),
     JwtModule.forRoot({
       config: {
