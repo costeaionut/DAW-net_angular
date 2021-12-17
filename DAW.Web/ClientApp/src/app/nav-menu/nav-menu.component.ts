@@ -46,6 +46,10 @@ export class NavMenuComponent {
     this.isExpanded = !this.isExpanded;
   }
 
+  printUser() {
+    console.log(this.currentUser)
+  }
+
   public checkRoleForBuyer() {
     if (this.isUserAuthenticated == true)
       if (this.currentUser.role == 'Buyer')

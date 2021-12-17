@@ -54,5 +54,7 @@ namespace DAW.Web.Controllers
             return Ok();
         }
 
+        //TODO: GroupBy paintings by seller
+
     }
 }

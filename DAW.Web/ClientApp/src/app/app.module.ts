@@ -10,17 +10,9 @@ import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
-import { RegisterComponent } from '../auth/register/register.component';
-import { LoginComponent } from '../auth/login/login.component';
 import { PaintingModule } from '../painting/painting.module';
-import { ListingComponent } from '../painting/listing/listing.component';
-import { PaintingDetailComponent } from '../painting/painting-detail/painting-detail.component';
-import { PaintingCreateComponent } from '../painting/painting-create/painting-create.component';
 import { OrderModule } from '../order/order.module';
-import { OrderDisplayComponent } from '../order/order-display/order-display.component';
-import { BuyerGuard } from './buyer.guard';
-import { UserAddressComponent } from '../auth/user-address/user-address.component';
-import { UserAddressFormComponent } from '../auth/user-address-form/user-address-form.component';
+import { AppRoutingModule } from './app-routing.module';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -40,18 +32,7 @@ export function tokenGetter() {
     AuthModule,
     PaintingModule,
     OrderModule,
-    RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full'},
-      { path: 'counter', component: CounterComponent },
-      { path: 'register', component: RegisterComponent },
-      { path: 'login', component: LoginComponent },
-      { path: 'listing', component: ListingComponent },
-      { path: 'create', component: PaintingCreateComponent },
-      { path: 'painting-detail/:paintingId', component: PaintingDetailComponent },
-      { path: 'display-cart', component: OrderDisplayComponent, canActivate: [BuyerGuard] },
-      { path: 'address', component: UserAddressComponent },
-      { path: 'create-address', component: UserAddressFormComponent }
-    ]),
+    AppRoutingModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
